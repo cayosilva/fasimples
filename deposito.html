@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app lang="pt">
+	<head>
+
+	    <meta charset="utf-8">
+	    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	    <link href="css/style.css" type="text/css" rel="stylesheet">
+	    <title>Deposito</title>
+
+	</head>
+
+	<body>
+
+		<br>
+		<center><h1>Deposito</h1></center>
+
+		<br><br>
+
+		<section>
+			
+			<form method="POST" action="">
+				
+                <center><label><input type="text" name="valor" class="form-control" placeholder="0,00"></label></center>
+                <br>
+				<center><label><input type="text" name="cpf" class="form-control" placeholder="C.P.F. usuário" onchange="TestaCPF(this)"></label></center>
+				<br>
+				<center><label><input type="text" name="cpf" class="form-control" placeholder="C.P.F. destinatário" onchange="TestaCPF(this)"></label></center>
+				<br>			
+				<center><label><input type="password" name="senha" class="form-control" placeholder="Senha" maxlength="6"></label></center>
+				<br>
+				<center><label><input type="submit" class="form-control" value="Enviar"></label></center>
+
+			</form>
+
+		</section>
+
+		<a href="index.html"><img src="img/setadireita.png" alt="Black" style="width:50px;height:50px;"></a>
+
+	</body>
+
+</html>

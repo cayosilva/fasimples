@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app lang="pt">
+	<head>
+
+	    <meta charset="utf-8">
+	    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	    <link href="css/style.css" type="text/css" rel="stylesheet">
+	    <script src="js/jquery.min.js"></script>
+	    <title>Confirmacao</title>
+
+	</head>
+
+	<body>
+
+		<script type="text/javascript">
+
+			window.addEventListener("load", getValores);
+			
+			function getValores() {
+
+				document.getElementById("valor").value = localStorage.getItem("valor");
+				document.getElementById("cpf").value = localStorage.getItem("cpf");
+				document.getElementById("senha").value = localStorage.getItem("senha");
+				console.log("Entrou");
+
+			}
+		
+		</script>
+
+
+		<br>
+		<center><h1>Confirmação</h1></center>
+
+		<br><br>
+
+		<section>
+			
+			<form method="GET">
+				
+				<center><label><input type="password" name="token" class="form-control" placeholder="PIN" maxlength="5"></label></center>
+				<center><label><input type="hidden" name="cpf" id="cpf" class="form-control" ></label></center>
+				<center><label><input type="hidden" name="valor" id="valor" class="form-control"></label></center>
+				<br>
+				<center><label><input type="submit" class="btn btn-success" id="Finalizar" value="Finalizar"></label></center>
+
+
+				<script type="text/javascript">
+
+
+			    document.getElementById("Finalizar").addEventListener("click", validaSenha);
+
+			    function validaSenha() {
+
+			    	
+
+			    	$.getJSON( "https://192.168.0.104/fasimples/services/Transact?operacao=1&cpfCedente="+document.getElementById('cpf').value+"&cpfDestino=&valor="+document.getElementById('value').value+"&token="+document.getElementById('pim').value, function( data ) {
+					var items = [];
+					alert(data.status)
+					if (data.status == "success") {
+
+					
+						window.location.href="sucesso.html"
+
+					}
+
+
+					$.each( data, function( key, val ) {
+					items.push( "<li id='" + key + "'>" + val + "</li>" );
+					});
+
+					$( "<ul/>", {
+					"class": "my-new-list",
+					html: items.join( "" )
+					}).appendTo( "body" );
+					});
+
+
+		       	
+			    	};
+
+			</script>
+
+
+
+			</form>
+
+		</section>
+
+		<a href="index.html"><img src="img/setadireita.png" alt="Black" style="width:50px;height:50px;"></a>
+
+	</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app lang="pt">
+	<head>
+
+	    <meta charset="utf-8">
+	    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	    <link href="css/style.css" type="text/css" rel="stylesheet">
+	    <script src="js/jquery.min.js">
+	    <script type="text/javascript"></script>
+	    <title>Saque</title>
+
+	</head>
+
+	<body>
+
+		<br>
+		<center><h1>Saque</h1></center>
+
+		<br><br>
+
+		<section>
+			
+			<form method="POST" action="confirmacaoPin.html" id="form1">
+				
+				<center><label><input type="text" name="valor" id="valor" class="form-control" placeholder="0,00"></label></center>
+				<br>
+				<center><label><input type="text" name="cpf" id="cpf" class="form-control" placeholder="C.P.F."></label></center>
+				<br>
+				<center><label><input type="password" name="senha" id="senha" class="form-control" placeholder="Senha" maxlength="5"></label></center>
+				<br>
+
+
+				<center><label><input type="button" class="form-control" id="Enviar" value="Enviar"></label></center>
+
+			</form>
+
+		</section>
+
+		<a href="index.html"><img src="img/setadireita.png" alt="Black" style="width:50px;height:50px;"></a>
+		
+
+
+			<script type="text/javascript">
+
+
+			    document.getElementById("Enviar").addEventListener("click", validaSenha);
+
+			    function validaSenha() {
+
+			    	
+
+			    	$.getJSON( "https://192.168.0.104/fasimples/services/login?cpf="+document.getElementById('cpf').value+"&password="+document.getElementById('senha').value, function( data ) {
+					var items = [];
+					
+					if (data.status == "success") {
+
+					$.getJSON( "https://192.168.0.104/fasimples/services/sendToken?cpf="+document.getElementById('cpf').value, function( data ) {
+					var items = [];
+					
+					$.each( data, function( key, val ) {
+					items.push( "<li id='" + key + "'>" + val + "</li>" );
+					});
+
+					$( "<ul/>", {
+					"class": "my-new-list",
+					html: items.join( "" )
+					}).appendTo( "body" );
+					});
+
+
+
+						window.location.href="confirmacaoPin.html"
+
+					}
+
+
+					$.each( data, function( key, val ) {
+					items.push( "<li id='" + key + "'>" + val + "</li>" );
+					});
+
+					$( "<ul/>", {
+					"class": "my-new-list",
+					html: items.join( "" )
+					}).appendTo( "body" );
+					});
+
+
+		       	
+			    	};
+
+			</script>
+	</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app lang="pt">
+	<head>
+
+	    <meta charset="utf-8">
+	    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	    <link href="css/style.css" type="text/css" rel="stylesheet">
+	    <script src="js/jquery.min.js"></script>
+	    <title>Cadastro</title>
+
+	</head>
+
+	<body>
+
+		<br>
+		<center><h1>Cadastro</h1></center>
+
+		<br><br>
+
+		<section>
+			
+			<form method="POST">
+				
+				<center><label><input type="text" name="cpf" class="form-control" placeholder="C.P.F." onchange="TestaCPF(this)"></label></center>
+				<br>
+				<center><label><input type="text" name="telefone" class="form-control" placeholder="(11) 99999-9999" maxlength="13"></label></center>
+				<br>
+				<center><label><input type="password" name="password" class="form-control" placeholder="Senha" maxlength="6"></label></center>
+				<br>
+				<center><label><input type="password" name="confirmaSenha" class="form-control" placeholder="Confirmação" maxlength="6"></label></center>
+				<br>
+				<center><label><input type="submit" id="Enviar" class="form-control" value="Enviar"></label></center>
+
+			</form>
+
+		</section>
+
+		<script type="text/javascript">
+
+
+			    document.getElementById("Enviar").addEventListener("click", validaSenha);
+
+			    function validaSenha() {
+
+			    	
+
+			    	$.getJSON( "https://192.168.0.104/fasimples/services/Cadastro?cpf="+document.getElementById('cpf').value+"&telefone="+document.getElementById('telefone').value+"&password="+document.getElementById('password').value, function( data ) {
+					var items = [];
+					alert(data.status)
+					if (data.status == "success") {
+
+					
+						window.location.href="sucesso.html"
+
+					}
+
+
+					$.each( data, function( key, val ) {
+					items.push( "<li id='" + key + "'>" + val + "</li>" );
+					});
+
+					$( "<ul/>", {
+					"class": "my-new-list",
+					html: items.join( "" )
+					}).appendTo( "body" );
+					});
+
+
+		       	
+			    	};
+
+			</script>
+
+		<a href="index.html"><img src="img/setadireita.png" alt="Black" style="width:50px;height:50px;"></a>
+
+	</body>
+
+</html>
